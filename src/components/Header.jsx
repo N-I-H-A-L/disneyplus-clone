@@ -24,6 +24,18 @@ const Header = (props) => {
   const username = useSelector(selectUserName);
   const userPhoto = useSelector(selectUserPhoto);
 
+  const setUser = (user) => {
+    //We are dispatching the information of the user to the Redux Store.
+    //This will update the states of 'name', 'email' and 'photo'.
+    dispatch(
+      setUserLoginDetails({
+        name: user.displayName,
+        email: user.email,
+        photo: user.photoURL
+      })
+    );
+  };
+
   //The function under useEffect hook will get triggered whenever the value of 'username' changes.
   useEffect(()=>{
     //We want to track the state of 'username' and whenever username changes, check if the 'user' is 
@@ -46,7 +58,9 @@ const Header = (props) => {
     //auth.signInWithPopup(provider) is a promise, if it is resolved correctly then the resolved value
     // will be sent to the .then() function as argument and .then() function will be executed otherwise
     // .catch() function will be executed.
-    auth
+    
+    if(!username){
+      auth
         .signInWithPopup(provider)
         .then((result) => {
           setUser(result.user);
@@ -54,18 +68,16 @@ const Header = (props) => {
         .catch((error) => {
           alert(error.message);
         });
-  };
-
-  const setUser = (user) => {
-    //We are dispatching the information of the user to the Redux Store.
-    //This will update the states of 'name', 'email' and 'photo'.
-    dispatch(
-      setUserLoginDetails({
-        name: user.displayName,
-        email: user.email,
-        photo: user.photoURL
+    }
+    else if(username){
+      auth
+      .signOut()
+      .then(() => {
+        dispatch(setSignOutState());
+        navigate("/");
       })
-    );
+      .catch((err) => alert(err.message));
+    }
   };
 
   return (
@@ -102,7 +114,10 @@ const Header = (props) => {
               <span>SERIES</span>
             </a>
           </NavMenu> 
-          <UserImg src={userPhoto}></UserImg>
+          <SignOut>
+            <UserImg src={userPhoto}></UserImg>
+            <Dropdown onClick={handleAuth}>Sign Out</Dropdown>
+          </SignOut>
         </>
       }
     </Nav>
@@ -195,10 +210,37 @@ const Login = styled.a`
   }
 `;
 
+const Dropdown = styled.div`
+  background: rgb(19, 19, 19);
+  border: 1px solid rgba(151, 151, 151, 0.34);
+  border-radius: 4px;
+  box-shadow: rgb(0 0 0 / 50%) 0px 0px 18px 0px;
+  padding: 10px;
+  font-size: 14px;
+  letter-spacing: 3px;
+  width: 105px;
+  position: relative;
+  right: 45px;
+  top: 5px;
+  opacity: 0;
+  cursor: pointer;
+`;
+
 const UserImg = styled.img`
   height: 70%;
-  margin-right: 10px;
+  margin-top: 15px;
   border-radius: 100%;
+`;
+
+const SignOut = styled.div`
+  height: 100%;
+
+  &:hover{
+    ${Dropdown}{
+      opacity: 1;
+      transition: 1s;
+    }
+  }
 `;
 
 export default Header;
