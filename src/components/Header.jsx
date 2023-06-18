@@ -9,6 +9,7 @@ import originalsSvg from '../assets/images/original-icon.svg';
 import watchlistSvg from '../assets/images/watchlist-icon.svg';
 import seriesSvg from '../assets/images/series-icon.svg';
 
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { selectUserName, selectUserPhoto, setUserLoginDetails, setSignOutState } from '../features/user/userSlice';
@@ -18,12 +19,33 @@ import { auth, provider } from '../firebaseConfig.js';
 const Header = (props) => {
   //useDispatch is for dispatching the request for pulling data from store.
   const dispatch = useDispatch();
-  const history = useNavigate();
+  const navigate = useNavigate();
   //useSelector will go to the store and pull 'selectUserName', similarly, 'selectUserPhoto'.
   const username = useSelector(selectUserName);
   const userPhoto = useSelector(selectUserPhoto);
 
+  //The function under useEffect hook will get triggered whenever the value of 'username' changes.
+  useEffect(()=>{
+    //We want to track the state of 'username' and whenever username changes, check if the 'user' is 
+    //a valid user or not, if it's a valid user, then load the 'Home.js'  component and also call the
+    //'setUser' function for updating the state. (Otherwise, the 'Login.js' component will be displayed 
+    //on the screen).
+    //navigate('/home' will change the URL of the website to '/home' thus, Home.js will be loaded).
+    auth.onAuthStateChanged(async (user)=>{
+      if(user){
+        setUser(user);
+        navigate('/home');
+      }
+    });
+  }, [username]);
+
   const handleAuth = () =>{
+    //This is the code for authorization, the signInWithPopup is a method to login, a popup window will
+    //be displayed on the screen (and that will be of Google since 'provider' is GoogleAuthProvider). 
+
+    //auth.signInWithPopup(provider) is a promise, if it is resolved correctly then the resolved value
+    // will be sent to the .then() function as argument and .then() function will be executed otherwise
+    // .catch() function will be executed.
     auth
         .signInWithPopup(provider)
         .then((result) => {
@@ -36,6 +58,7 @@ const Header = (props) => {
 
   const setUser = (user) => {
     //We are dispatching the information of the user to the Redux Store.
+    //This will update the states of 'name', 'email' and 'photo'.
     dispatch(
       setUserLoginDetails({
         name: user.displayName,
