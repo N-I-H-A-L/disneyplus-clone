@@ -50,33 +50,38 @@ const Header = (props) => {
       <Logo>
         <img src={logoSvg} alt="Disney+" />
       </Logo>
-      <NavMenu>
-        <a href="/home">
-          <img src={homeSvg} alt="HOME"/>
-          <span>HOME</span>
-        </a>
-        <a href="/search">
-          <img src={searchSvg} alt="SEARCH"/>
-          <span>SEARCH</span>
-        </a>
-        <a href="/watchlist">
-          <img src={watchlistSvg} alt="WATCHLIST"/>
-          <span>WATCHLIST</span>
-        </a>
-        <a href="/originals">
-          <img src={originalsSvg} alt="ORIGINALS"/>
-          <span>ORIGINALS</span>
-        </a>
-        <a href="/movies">
-          <img src={moviesSvg} alt="MOVIES"/>
-          <span>MOVIES</span>
-        </a>
-        <a href="/series">
-          <img src={seriesSvg} alt="SERIES"/>
-          <span>SERIES</span>
-        </a>
-      </NavMenu>
-      <Login onClick={handleAuth}>LOGIN</Login>
+      {!username? 
+        <Login onClick={handleAuth}>LOGIN</Login> :
+        <>
+          <NavMenu>
+            <a href="/home">
+              <img src={homeSvg} alt="HOME"/>
+              <span>HOME</span>
+            </a>
+            <a href="/search">
+              <img src={searchSvg} alt="SEARCH"/>
+              <span>SEARCH</span>
+            </a>
+            <a href="/watchlist">
+              <img src={watchlistSvg} alt="WATCHLIST"/>
+              <span>WATCHLIST</span>
+            </a>
+            <a href="/originals">
+              <img src={originalsSvg} alt="ORIGINALS"/>
+              <span>ORIGINALS</span>
+            </a>
+            <a href="/movies">
+              <img src={moviesSvg} alt="MOVIES"/>
+              <span>MOVIES</span>
+            </a>
+            <a href="/series">
+              <img src={seriesSvg} alt="SERIES"/>
+              <span>SERIES</span>
+            </a>
+          </NavMenu> 
+          <UserImg src={userPhoto}></UserImg>
+        </>
+      }
     </Nav>
   )
 }
@@ -165,6 +170,12 @@ const Login = styled.a`
     color: #000;
     cursor: pointer;
   }
+`;
+
+const UserImg = styled.img`
+  height: 70%;
+  margin-right: 10px;
+  border-radius: 100%;
 `;
 
 export default Header;
