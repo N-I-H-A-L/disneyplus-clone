@@ -1,41 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
-
-import background from '../assets/images/home-background.png';
+import { useSelector } from 'react-redux';
+import { selectRecommend } from '../features/movie/movieSlice';
 
 const Recommends = () => {
+  const movies = useSelector(selectRecommend);
+
   return (
     <Container>
       <h4>Recommended For You</h4>
       <Content>
-        <Wrapper>
-          <Link to='/'>
-            {/* <img src=${} alt=''/> */}
-          </Link>
-        </Wrapper>
-
-        <Wrapper>
-          <Link to='/'>
-            {/* <img src=${} alt=''/> */}
-          </Link>
-        </Wrapper>
-
-        <Wrapper>
-          <Link to='/'>
-            {/* <img src=${} alt=''/> */}
-          </Link>
-        </Wrapper>
-
-        <Wrapper>
-          <Link to='/'>
-            {/* <img src=${} alt=''/> */}
-          </Link>
-        </Wrapper>
+        {movies && 
+          movies.map((movie, key)=>(
+            <Wrapper id={key}>
+              <Link to='/'>
+                <img src={movie.cardImg} alt=''/>
+              </Link>
+            </Wrapper>
+          ))}
       </Content>
     </Container>
-  )
-}
+  );
+};
 
 const Container = styled.div`
   position: relative;
@@ -58,10 +45,12 @@ const Wrapper = styled.div`
     rgb(0 0 0 / 72%) 0px 30px 22px -10px;
   cursor: pointer;
   border-radius: 10px;
-  border: 3px solid rgba(249, 249, 249, 0.8);
+  border: 3px solid rgba(249, 249, 249, 0.1);
+  overflow: hidden;
 
   img{
-
+    height: 100%;
+    width: 100%;
   }
 
   &:hover{

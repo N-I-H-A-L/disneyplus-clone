@@ -2,8 +2,6 @@ import React from 'react'
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 
-import background from '../assets/images/home-background.png';
-
 const Trending = () => {
   return (
     <Container>
