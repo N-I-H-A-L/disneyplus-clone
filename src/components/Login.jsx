@@ -29,15 +29,17 @@ const Container = styled.section`
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  height: auto;
 `;
 
 const Content = styled.div`
-  height: 100vh;
+  height: 88.8vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+  position: relative;
 `;
 
 const BgImage = styled.div`
@@ -68,8 +70,8 @@ const CTALogoOne = styled.div`
   height: 10vh;
   width: 100%;
   position: relative;
-  top: 8%;
   max-width: 650px;
+  min-width: 300px;
   min-height: 1px;
   display: block;
 `;
@@ -82,7 +84,7 @@ const SignUp = styled.a`
   font-size: 18px;
   width: 100%;
   position: relative;
-  top: 10%;
+  top: 5%;
   border: 2px solid transparent;
   text-align: center;
   border-radius: 4px;
@@ -101,7 +103,7 @@ const Description = styled.p`
   text-align: center;
   width: 100%;
   position: relative;
-  bottom: 4%;
+  bottom: 5%;
 `;
 
 const CTALogoTwo = styled.img`

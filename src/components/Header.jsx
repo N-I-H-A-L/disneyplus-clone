@@ -192,6 +192,10 @@ const NavMenu = styled.div`
       }
     }
   }
+
+  @media screen and (max-width: 850px){
+    display: none;
+  }
 `;
 
 const Login = styled.a`
@@ -224,12 +228,16 @@ const Dropdown = styled.div`
   top: 5px;
   opacity: 0;
   cursor: pointer;
+  z-index: 1;
 `;
 
 const UserImg = styled.img`
   height: 70%;
-  margin-top: 15px;
+  width: auto;
+  margin-top: 11px;
   border-radius: 100%;
+  position: relative;
+  left: 40px;
 `;
 
 const SignOut = styled.div`
