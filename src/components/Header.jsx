@@ -13,7 +13,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { selectUserName, selectUserPhoto, setUserLoginDetails, setSignOutState } from '../features/user/userSlice';
-
 import { auth, provider } from '../firebaseConfig.js';
 
 const Header = (props) => {
@@ -193,7 +192,7 @@ const NavMenu = styled.div`
     }
   }
 
-  @media screen and (max-width: 850px){
+  @media screen and (max-width: 870px){
     display: none;
   }
 `;

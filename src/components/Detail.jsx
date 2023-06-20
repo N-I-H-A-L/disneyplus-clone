@@ -84,8 +84,9 @@ const Background = styled.div`
         height: 100%;
     }
 
-    @media (max-width: 420px){
-        /* object-fit: cover; */
+    @media (max-width: 1068px) and (min-width: 768px){
+        height: 100%;
+        width: 100%;
     }
   }  
 `;
@@ -204,7 +205,7 @@ const Description = styled.div`
     word-spacing: 1.2;
     letter-spacing: 1.3;
 
-    @media (max-width: 768px){
+    @media (max-width: 870px){
         font-size: 15px;
         margin-left: 30px;
         width: auto;
