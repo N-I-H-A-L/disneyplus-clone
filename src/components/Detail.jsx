@@ -8,10 +8,19 @@ import playBlack from '../assets/images/play-icon-black.png';
 import playWhite from '../assets/images/play-icon-white.png';
 import groupIcon from '../assets/images/group-icon.png';
 
+//useParams() hook helps in retrieving data from the URL of the website, check in the App component, for
+// Detail page we gave ":id" as the URL, so we will retrieve that URL using useParams(), which will give us
+// the ID of the movie, we want to target.
 const Detail = () => {
     const { id } = useParams();
+    //We will update state of 'detailState' using useState hook.
     const [detailState, setDetailState] = useState({});
 
+    //Whenever, the ID in the URL changes (and since useParams() is a hook, it will track if ID changes), 
+    //we want the following to happen:
+    //Search from the "movies" collection of our firebase database and find if there's any movie with the
+    //ID as 'id', if doc exists, update detailState. 
+    //If any error occurred while fetching data, prompt an alert.
     useEffect(()=>{
         db.collection("movies")
         .doc(id)

@@ -5,16 +5,21 @@ import { useSelector } from 'react-redux';
 import { selectRecommend } from '../features/movie/movieSlice';
 
 const Recommends = () => {
+  //Retrieve all the 'recommend' type movies from Redux store using useSelector hook and 'selectRecommend'
+  //action.
   const movies = useSelector(selectRecommend);
 
+  //Loop the movies present using 'map()', and create HTML elements so they can be rendered on the webpage.
   return (
     <Container>
       <h4>Recommended For You</h4>
       <Content>
-        {movies && 
+        {movies && //if movies is not empty, then the code after && will run.
           movies.map((movie, key)=>(
             <Wrapper id={key}>
-              <Link to={'/detail/' + movie.id}>
+              <Link to={'/detail/' + movie.id}> 
+              {/* We want movie's id to be added with 'detail' so that we can retrieve the movie's id
+              using useParams(), see 'Detail.jsx' to understand. */}
                 <img src={movie.cardImg} alt={movie.title}/>
               </Link>
             </Wrapper>

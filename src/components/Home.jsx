@@ -17,17 +17,26 @@ import background from '../assets/images/home-background.png';
 
 const Home = (props) => {
   const dispatch = useDispatch();
+  //Get the username using useSelector hook and selectUserName action. (See userSlice.js)
   const username = useSelector(selectUserName);
 
+  //Before reading the below code, review movieSlice.js once.
   useEffect(()=>{
+    //We want the movies of different types to be separated and kept in different arrays, so we can send it
+    //to update the state.
     let recommends = [];
     let newDisneys = [];
     let originals = [];
     let trendings = [];
+    //Loop all the "movies" present using "map()". And keep them in the respective array depending on
+    //their types.
     db.collection('movies').onSnapshot((snapshot)=>{
       snapshot.docs.map((doc)=>{
         switch(doc.data().type){
           case "recommend":
+            //The below syntax says: copy whatever you have in recommends to recommends (spread operator 
+            //'...') and add the current doc.id and ...doc.data() (again it's spread operator, to
+            //write whatever you have inside doc.data() to be stored) to it. 
             recommends = [...recommends, {id: doc.id, ...doc.data()}];
             break;
           case "new":
@@ -41,7 +50,9 @@ const Home = (props) => {
             break;
         }
       });
-
+      
+      //Dispatch the newly updated list of movies, which will be fetched by different components as and
+      //when required.
       dispatch(
         setMovies({
           recommend: recommends,
