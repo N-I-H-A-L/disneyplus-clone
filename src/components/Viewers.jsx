@@ -59,6 +59,7 @@ const Container = styled.div`
   display: grid;
   grid-gap: 25px;
   grid-template-columns: repeat(5, minmax(0, 1fr));
+  height: 100%;
 
   @media (max-width: 768px){
     grid-template-columns: repeat(1, minmax(0, 1fr));

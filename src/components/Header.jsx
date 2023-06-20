@@ -81,7 +81,7 @@ const Header = (props) => {
   };
 
   return (
-    <Nav>
+    <Nav className='navbar'>
       <Logo>
         <img src={logoSvg} alt="Disney+" />
       </Logo>

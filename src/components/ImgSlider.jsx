@@ -19,7 +19,7 @@ const ImgSlider = () => {
         autoplay: true,
     }
   return (
-      <Carousel {...settings}>
+      <Carousel {...settings} className='imgSlider'>
         <Wrapper>
             <a>
                 <img src={badag} alt='' />

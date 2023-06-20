@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
@@ -14,8 +14,8 @@ const Recommends = () => {
         {movies && 
           movies.map((movie, key)=>(
             <Wrapper id={key}>
-              <Link to='/'>
-                <img src={movie.cardImg} alt=''/>
+              <Link to={'/detail/' + movie.id}>
+                <img src={movie.cardImg} alt={movie.title}/>
               </Link>
             </Wrapper>
           ))}
@@ -28,6 +28,7 @@ const Container = styled.div`
   position: relative;
   top: 50px;
   padding: 0 0 26px;
+  height: 100%;
 `;
 
 const Content = styled.div`
