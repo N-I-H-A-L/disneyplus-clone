@@ -83,6 +83,10 @@ const Background = styled.div`
     @media (max-width: 768px){
         height: 100%;
     }
+
+    @media (max-width: 420px){
+        /* object-fit: cover; */
+    }
   }  
 `;
 
@@ -93,6 +97,10 @@ const TitleImg = styled.div`
         width: auto;
         min-height: 150px;
         min-width: 250px;
+
+        @media (max-width: 300px){
+            width: 50px;
+        }
     }
 
     @media (max-width: 768px){
@@ -111,6 +119,10 @@ const Content = styled.div`
 const Controls = styled.div`
     display: flex;
     flex-direction: row;
+
+    @media (max-width: 380px){
+        flex-direction: column;
+    }
 `;
 
 const Player = styled.div`
@@ -144,6 +156,11 @@ const Trailer = styled(Player)`
     border: 1px solid rgb(249, 249, 249);
     color: rgb(249, 249, 249);
     margin-left: -10px;
+
+    @media (max-width: 380px){
+        margin-left: 30px;
+        margin-top: -15px;
+    }
 `;
 
 const GroupIcon = styled.div`
@@ -156,6 +173,10 @@ const GroupIcon = styled.div`
 
     &:hover{
         cursor: pointer;
+    }
+
+    @media (max-width: 420px){
+        display: none;
     }
 `;
 
