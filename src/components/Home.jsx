@@ -67,11 +67,14 @@ const Home = (props) => {
 
 const Container = styled.main`
   position: relative;
-  /* min-height: calc(100vh - 250px); */
+  min-height: calc(100vh - 250px);
   overflow-x: hidden;
   display: block;
   padding: 0 calc(3.5vw + 5px);
-  height: 100%;
+  height: auto;
+  background: url(${background}) center center / cover
+      no-repeat fixed;
+  padding-bottom: calc(3.5vw + 15px);
 
   &:after {
     background: url(${background}) center center / cover
